@@ -85,8 +85,9 @@ import { CommonModule } from '@angular/common';
     imports: [AlbumComponent, CommonModule],
     template: `
     <h2>{{title}}</h2>
-    <div *ngFor="let album of albums">
-    <app-album [details] ="album" (ownedEvent)="updateOwned($event)"/>
+    <!-- //index can also be first, odd,even etc -->
+    <div *ngFor="let album of albums; index as i">
+    {{i+1}}<app-album [details] ="album" [index]="i" (ownedEvent)="updateOwned($event)" (add) ="onAdd()"/>
     </div>
     `
 })
@@ -102,6 +103,10 @@ export class AlbumsComponent {
 
     updateOwned(id:number){
       this.albums[id-1].owned = !this.albums[id-1].owned
+    }
+
+    onAdd(){
+        this.albums.push({id: 5, title: "Happy Atmosphere", artist: "Russ Abbott", owned:false})
     }
 }
 

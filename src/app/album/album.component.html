@@ -1,8 +1,23 @@
 <h1>Title</h1>
 <h3>{{details.title}}</h3>
+<h1> index: {{index}}</h1>
 
 <h1>Artist</h1>
 <h3>{{details.artist}}</h3>
 
-<h1>Owned</h1>
-<h3 (click)="ownedClicked()">{{details.owned}}</h3>
+<div *ngIf ="details.owned == true; then owned else notOwned"></div>
+
+    <ng-template #owned>   
+        <h1>Owned</h1>
+        <h3 (click)="ownedClicked()">{{details.owned}}</h3>
+    </ng-template> 
+
+    <ng-template #notOwned>   
+        <h1>Not Owned</h1>
+        <h3 (click)="ownedClicked()">{{details.owned}}</h3>
+    </ng-template> 
+
+<button (click)="addClicked()"> Add Album</button>
+
+
+
